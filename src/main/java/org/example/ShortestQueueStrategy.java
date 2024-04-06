@@ -1,17 +1,19 @@
-package org.example.business.logic;
+package org.example;
 
 import java.util.List;
 
 public class ShortestQueueStrategy implements Strategy {
     @Override
-    synchronized public void addTask(List<Server> servers, MyTask t) {
+    public synchronized void addTask(List<Server> servers, Task t) {
+        System.out.println("strategy here");
         Server bestServer = null;
         Integer shortestQ = Integer.MAX_VALUE;
         for (Server server : servers)
-            if(server.getTasks().size() < shortestQ) {
-                shortestQ = server.getTasks().size();
+            if(server.getTaskQ().size() < shortestQ) {
+                shortestQ = server.getTaskQ().size();
                 bestServer = server;
             }
         bestServer.addTask(t);
+        System.out.println("Strategy finished");
     }
 }

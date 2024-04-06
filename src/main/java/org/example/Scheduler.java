@@ -1,17 +1,16 @@
-package org.example.business.logic;
+package org.example;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 
 public class Scheduler {
-
     public Scheduler(Integer maximumNumberOfServers, Integer maximumTasksPerServer) {
         this.maximumNumberOfServers = maximumNumberOfServers;
         this.maximumTasksPerServer = maximumTasksPerServer;
         this.serverList = new ArrayList<>();
         for (int i = 0; i < maximumNumberOfServers; i++) {
-            this.serverList.add(new Server());
-            Thread t = new Thread(this.serverList.get(i));
+            this.serverList.add(new Server("Thread #" + i));
+            Thread t = new Thread(this.serverList.get(i), this.serverList.get(i).getServerName());
             t.start();
         }
     }
@@ -24,8 +23,15 @@ public class Scheduler {
         }
     }
 
-    synchronized public void dispatchTask(MyTask task) {
+    public synchronized void dispatchTask(Task task) {
         this.strategy.addTask(this.serverList, task);
+        System.out.println("dispatch finished");
+    }
+
+    public synchronized void stopServers() {
+        for (Server server : this.serverList) {
+            server.setHasFinished();
+        }
     }
 
     public ArrayList<Server> getServerList() {

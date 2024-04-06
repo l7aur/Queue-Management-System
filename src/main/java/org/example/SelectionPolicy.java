@@ -1,4 +1,4 @@
-package org.example.business.logic;
+package org.example;
 
 public enum SelectionPolicy {
     SHORTEST_QUEUE,
