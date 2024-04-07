@@ -12,9 +12,6 @@ public class Task {
         return this.id + " -> (arrT: " + this.arrivalTime + "; servT: " + this.serviceTime + ")";
     }
 
-    public Integer getId() {
-        return id;
-    }
     public Integer getArrivalTime() {
         return arrivalTime;
     }

@@ -1,7 +1,6 @@
 package org.example.businesslogic;
 
 import org.example.utility.Strategy;
-
 import java.util.List;
 
 public class TimeStrategy implements Strategy {
