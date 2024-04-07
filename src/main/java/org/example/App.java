@@ -11,12 +11,10 @@ public class App {
 
     public void start() {
         StartButtonActionListener actionListener = this.applicationFrame.getActionListener();
-        this.manager = new SimulationManager(actionListener.getInputData(), actionListener.getSelectionPolicy());
-        Thread thread = new Thread(this.manager);
+        SimulationManager manager = new SimulationManager(actionListener.getInputData(), actionListener.getSelectionPolicy());
+        Thread thread = new Thread(manager);
         thread.start();
-        System.out.println("OK");
     }
 
-    private SimulationManager manager;
     private final ApplicationFrame applicationFrame;
 }

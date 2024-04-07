@@ -14,19 +14,26 @@ public class ApplicationFrame extends JFrame {
         this.currentApp = app;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.content = this.getContentPane();
-        this.content.setLayout(new BorderLayout());
+        this.backPanel = new JPanel();
+        this.frontPanel = new JPanel();
+        this.cardLayout = new CardLayout();
+        this.content.setLayout(cardLayout);
+        this.content.add(this.frontPanel);
+        this.content.add(this.backPanel);
+        this.frontPanel.setLayout(new BorderLayout());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.textFields = new ArrayList<>();
         this.createContent();
         this.setBounds(screenSize.width / 4,screenSize.height / 4,screenSize.width / 2,screenSize.height / 2);
+        this.cardLayout.first(this.content);
         this.setVisible(true);
     }
 
     protected void createButton() {
         JButton startButton = new JButton("Start Simulation");
-        this.actionListener = new StartButtonActionListener(this.textFields, this.group, this.currentApp);
+        this.actionListener = new StartButtonActionListener(this.textFields, this.group, this.currentApp, this.cardLayout, this.content);
         startButton.addActionListener(actionListener);
-        this.content.add(startButton, BorderLayout.SOUTH);
+        this.frontPanel.add(startButton, BorderLayout.SOUTH);
     }
 
     protected void createInputPanel() {
@@ -46,7 +53,7 @@ public class ApplicationFrame extends JFrame {
             panel.add(labelPanel);
         }
         panel.add(this.createChoiceField());
-        this.content.add(panel, BorderLayout.CENTER);
+        this.frontPanel.add(panel, BorderLayout.CENTER);
     }
 
     protected JPanel createChoiceField() {
@@ -81,7 +88,7 @@ public class ApplicationFrame extends JFrame {
 
     protected void createContent() {
         JPanel panel = new JPanel();
-        this.content.add(panel, BorderLayout.CENTER);
+        this.frontPanel.add(panel, BorderLayout.CENTER);
         this.createInputPanel();
         this.createButton();
     }
@@ -93,6 +100,9 @@ public class ApplicationFrame extends JFrame {
     private StartButtonActionListener actionListener;
     private final App currentApp;
     private final Container content;
+    private CardLayout cardLayout;
     private final ArrayList<JTextField> textFields;
+    private JPanel frontPanel;
+    private JPanel backPanel;
     private ButtonGroup group;
 }
