@@ -108,7 +108,6 @@ public class SimulationManager implements Runnable{
         return arrayList;
     }
 
-
     private BlockingQueue<Task> generatePredefinedTasks() {
         BlockingQueue<Task> arrayList = new LinkedBlockingQueue<>();
         arrayList.add(new Task(1, 1, 2));
