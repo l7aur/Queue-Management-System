@@ -1,4 +1,6 @@
-package org.example;
+package org.example.businesslogic;
+
+import org.example.utility.SelectionPolicy;
 
 import java.io.File;
 import java.io.FileWriter;

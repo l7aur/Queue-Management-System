@@ -1,7 +1,9 @@
-package org.example;
+package org.example.businesslogic;
+
+import org.example.utility.SelectionPolicy;
+import org.example.utility.Strategy;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
 
 public class Scheduler {
     public Scheduler(Integer maximumNumberOfServers, Integer maximumTasksPerServer) {
@@ -45,9 +47,8 @@ public class Scheduler {
         return serverList;
     }
 
-    private ExecutorService executorService;
-    private ArrayList<Server> serverList;
-    private Integer maximumNumberOfServers;
-    private Integer maximumTasksPerServer;
+    private final ArrayList<Server> serverList;
+    private final Integer maximumNumberOfServers;
+    private final Integer maximumTasksPerServer;
     private Strategy strategy;
 }

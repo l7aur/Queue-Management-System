@@ -1,8 +1,11 @@
 package org.example;
 
+import org.example.businesslogic.SimulationManager;
+import org.example.gui.SimulationFrame;
+
 public class App {
     public App() {
-
+        this.simulationFrame = new SimulationFrame();
     }
 
     void start() {
@@ -16,4 +19,5 @@ public class App {
     }
 
     private SimulationManager manager;
+    private SimulationFrame simulationFrame;
 }

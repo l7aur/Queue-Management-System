@@ -1,4 +1,4 @@
-package org.example;
+package org.example.utility;
 
 public enum SelectionPolicy {
     SHORTEST_QUEUE,

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.businesslogic;
+
+import org.example.utility.Strategy;
 
 import java.util.List;
 

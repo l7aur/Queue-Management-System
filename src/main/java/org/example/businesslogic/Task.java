@@ -1,4 +1,4 @@
-package org.example;
+package org.example.businesslogic;
 
 public class Task {
     public Task(Integer id, Integer arrivalTime, Integer serviceTime) {
@@ -15,15 +15,12 @@ public class Task {
     public Integer getId() {
         return id;
     }
-
     public Integer getArrivalTime() {
         return arrivalTime;
     }
-
     public Integer getServiceTime() {
         return serviceTime;
     }
-
     public void decrementServiceTime() {
         this.serviceTime -= 1;
     }
