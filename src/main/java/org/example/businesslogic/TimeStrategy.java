@@ -6,13 +6,18 @@ import java.util.List;
 public class TimeStrategy implements Strategy {
     @Override
     public void addTask(List<Server> servers, Task t) {
-        Server bestServer = null;
+        Server bestServer = servers.getFirst();
         Integer bestWaitingPeriod = Integer.MAX_VALUE;
-//        for (Server server : servers)
-//            if(server.getWaitingPeriod().get() < bestWaitingPeriod) {
-//                bestWaitingPeriod = server.getWaitingPeriod().get();
-//                bestServer = server;
-//            }
-//        bestServer.addTask(t);
+        Integer haveToWait = 0;
+        for (Server server : servers) {
+            haveToWait = 0;
+            for (Task task : server.getTaskQ())
+                haveToWait += task.getServiceTime();
+            if (haveToWait < bestWaitingPeriod) {
+                bestWaitingPeriod = haveToWait;
+                bestServer = server;
+            }
+        }
+        bestServer.addTask(t);
     }
 }

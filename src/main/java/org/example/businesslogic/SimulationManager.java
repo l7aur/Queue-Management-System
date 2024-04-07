@@ -38,8 +38,8 @@ public class SimulationManager implements Runnable{
     }
 
     @Override
-    public void run() {
-        BlockingQueue<Task> tasks = this.generatePredefinedTasks();
+    public synchronized void run() {
+        tasks = this.generatePredefinedTasks();
 //        BlockingQueue<Task> tasks = this.generatePredefinedTasks(this.numberOfClients);
         this.printTasks(tasks);
         while(currentTime <= timeLimit && !noWork) {
@@ -73,8 +73,25 @@ public class SimulationManager implements Runnable{
                 noWork = this.scheduler.stopServers();
             }
         }
-
+        this.printMetadata();
+        System.out.println("<DEBUG>Simulation finished");
     }
+
+    private void printMetadata() {
+        //average time for finishing task + queue waiting divided by how many
+        try {
+            FileWriter fileOut = new FileWriter(stateFile, true);
+            double x = 0.0;
+            for (Server server : this.scheduler.getServerList())
+                x += server.getWaitingPeriod().doubleValue();
+            fileOut.write("Average overall waiting time: " + x / this.numberOfClients);
+            fileOut.flush();
+            fileOut.close();
+        } catch (IOException e) {
+            System.out.println("WHERE FILE?");
+        }
+    }
+
     private void printTasks(BlockingQueue<Task> tasks) {
         File path = new File("tasks.txt");
         try {
@@ -93,10 +110,16 @@ public class SimulationManager implements Runnable{
     private void printStateOfServers(Integer currentTime) {
         try {
             FileWriter fileOut = new FileWriter(stateFile, true);
-            fileOut.write("Current time: " + currentTime + "\n");
-            fileOut.write("State of servers:\n");
+            fileOut.write("Current time: " + currentTime + "\nWaiting people:\n");
+            for (Task task : tasks) {
+                fileOut.write( ">>" + task.toString() + "\n");
+            }
+            fileOut.write("\nState of servers:\n");
             for (Server server : this.scheduler.getServerList()) {
-                fileOut.write("server: <" + server.getServerName() + "> has amount of work: " + server.getTaskQ().size() + "\n");
+                if(server.getTaskQ().isEmpty())
+                    fileOut.write("server: <" + server.getServerName() + "> is closed\n");
+                else
+                    fileOut.write("server: <" + server.getServerName() + "> has amount of work: " + server.getTaskQ().size() + "\n");
                 for (Task task : server.getTaskQ()) {
                     fileOut.write("\t" + task.toString() + "\n");
                 }
@@ -121,25 +144,22 @@ public class SimulationManager implements Runnable{
 
     private BlockingQueue<Task> generatePredefinedTasks() {
         BlockingQueue<Task> arrayList = new LinkedBlockingQueue<>();
-        arrayList.add(new Task(1, 1, 2));
-        arrayList.add(new Task(2, 2, 5));
-        arrayList.add(new Task(3, 3, 1));
-        arrayList.add(new Task(4, 4, 4));
-        arrayList.add(new Task(5, 5, 7));
-        ///5
-        arrayList.add(new Task(6, 1, 2));
-        arrayList.add(new Task(7, 5, 3));
-        arrayList.add(new Task(8, 3, 4));
-        arrayList.add(new Task(9, 2, 1));
-        arrayList.add(new Task(10, 5, 1));
-        ///10
+//        arrayList.add(new Task(1, 2, 2));
+//        arrayList.add(new Task(2, 3, 3));
+//        arrayList.add(new Task(3, 4, 3));
+//        arrayList.add(new Task(4, 10, 2));
+
+        arrayList.add(new Task(1, 1, 6));
+        arrayList.add(new Task(2, 1, 3));
+        arrayList.add(new Task(3, 1, 1));
+        arrayList.add(new Task(4, 1, 2));
         return arrayList;
     }
     private Integer currentTime = 0;
     private final Scheduler scheduler;
     private Boolean noWork = false;
     private File stateFile;
-
+    private BlockingQueue<Task> tasks;
     private final Integer timeLimit;
     private final Integer maxProcessingTime;
     private final Integer minProcessingTime;
