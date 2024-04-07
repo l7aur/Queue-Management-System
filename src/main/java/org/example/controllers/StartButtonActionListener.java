@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import org.example.App;
 import org.example.utility.SelectionPolicy;
 
 import javax.swing.*;
@@ -31,15 +32,26 @@ public class StartButtonActionListener implements ActionListener {
             System.out.println(inputDatum);
         }
         System.out.println(selectionPolicy.toString());
-        inputData.clear();
+        currentApp.start();
     }
 
-    public StartButtonActionListener(ArrayList<JTextField> textFields, ButtonGroup buttonGroup) {
+    public StartButtonActionListener(ArrayList<JTextField> textFields, ButtonGroup buttonGroup, App currentApp) {
         super();
+        this.currentApp = currentApp;
         this.textFields = textFields;
         this.buttonGroup = buttonGroup;
         this.inputData = new ArrayList<>();
     }
+
+    public ArrayList<Integer> getInputData() {
+        return inputData;
+    }
+
+    public SelectionPolicy getSelectionPolicy() {
+        return selectionPolicy;
+    }
+
+    private final App currentApp;
     private final ArrayList<JTextField> textFields;
     private final ButtonGroup buttonGroup;
     private final ArrayList<Integer> inputData;

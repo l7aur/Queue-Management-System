@@ -1,5 +1,6 @@
 package org.example.gui;
 
+import org.example.App;
 import org.example.controllers.StartButtonActionListener;
 
 import javax.swing.*;
@@ -8,8 +9,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ApplicationFrame extends JFrame {
-    public ApplicationFrame() {
+    public ApplicationFrame(App app) {
         super("Queue Management System");
+        this.currentApp = app;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.content = this.getContentPane();
         this.content.setLayout(new BorderLayout());
@@ -22,7 +24,8 @@ public class ApplicationFrame extends JFrame {
 
     protected void createButton() {
         JButton startButton = new JButton("Start Simulation");
-        startButton.addActionListener(new StartButtonActionListener(textFields, group));
+        this.actionListener = new StartButtonActionListener(this.textFields, this.group, this.currentApp);
+        startButton.addActionListener(actionListener);
         this.content.add(startButton, BorderLayout.SOUTH);
     }
 
@@ -83,6 +86,12 @@ public class ApplicationFrame extends JFrame {
         this.createButton();
     }
 
+    public StartButtonActionListener getActionListener() {
+        return actionListener;
+    }
+
+    private StartButtonActionListener actionListener;
+    private final App currentApp;
     private final Container content;
     private final ArrayList<JTextField> textFields;
     private ButtonGroup group;

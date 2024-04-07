@@ -1,23 +1,22 @@
 package org.example;
 
 import org.example.businesslogic.SimulationManager;
+import org.example.controllers.StartButtonActionListener;
 import org.example.gui.ApplicationFrame;
 
 public class App {
     public App() {
-        this.simulationFrame = new ApplicationFrame();
+        this.applicationFrame = new ApplicationFrame(this);
     }
 
-    void start() {
-        //this.manager = new SimulationManager();
-        //Thread thread = new Thread(this.manager);
-        //thread.start();
-    }
-
-    void quit() {
-
+    public void start() {
+        StartButtonActionListener actionListener = this.applicationFrame.getActionListener();
+        this.manager = new SimulationManager(actionListener.getInputData(), actionListener.getSelectionPolicy());
+        Thread thread = new Thread(this.manager);
+        thread.start();
+        System.out.println("OK");
     }
 
     private SimulationManager manager;
-    private ApplicationFrame simulationFrame;
+    private final ApplicationFrame applicationFrame;
 }

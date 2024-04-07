@@ -5,12 +5,20 @@ import org.example.utility.SelectionPolicy;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class SimulationManager implements Runnable{
-    public SimulationManager(){
+    public SimulationManager(ArrayList<Integer> inputData, SelectionPolicy selectionPolicy) {
+        this.numberOfClients = inputData.getFirst();
+        this.numberOfServers = inputData.get(1);
+        this.timeLimit = inputData.get(2);
+        this.minArrivalTime = inputData.get(3);
+        this.maxArrivalTime = inputData.get(4);
+        this.minProcessingTime = inputData.get(5);
+        this.maxProcessingTime = inputData.get(6);
         this.scheduler = new Scheduler(numberOfServers, numberOfClients);
         this.scheduler.changeStrategy(selectionPolicy);
         this.stateFile = initializeOutputFile();
@@ -32,6 +40,7 @@ public class SimulationManager implements Runnable{
     @Override
     public void run() {
         BlockingQueue<Task> tasks = this.generatePredefinedTasks();
+//        BlockingQueue<Task> tasks = this.generatePredefinedTasks(this.numberOfClients);
         this.printTasks(tasks);
         while(currentTime <= timeLimit && !noWork) {
             System.out.println("<DEBUG>Current time: " + currentTime);
@@ -39,7 +48,9 @@ public class SimulationManager implements Runnable{
             for (Task task : tasks) {
                 if (task.getArrivalTime().compareTo(currentTime) <= 0) {
                     this.scheduler.dispatchTask(task);
-                    tasks.remove(task);
+                    if(!tasks.remove(task)){
+                        System.out.println("<ERROR>Did not remove task: " + task);
+                    }
                     numberOfLeftServers--;
                     if(numberOfLeftServers == 0){
                         break;
@@ -129,12 +140,11 @@ public class SimulationManager implements Runnable{
     private Boolean noWork = false;
     private File stateFile;
 
-    public Integer timeLimit = 10;
-    public Integer maxProcessingTime = 5;
-    public Integer minProcessingTime = 1;
-    public Integer minArrivalTime = 1;
-    public Integer maxArrivalTime = 1;
-    public Integer numberOfServers = 3;
-    public Integer numberOfClients = 10;
-    public SelectionPolicy selectionPolicy = SelectionPolicy.SHORTEST_QUEUE;
+    private final Integer timeLimit;
+    private final Integer maxProcessingTime;
+    private final Integer minProcessingTime;
+    private final Integer minArrivalTime;
+    private final Integer maxArrivalTime;
+    private final Integer numberOfServers;
+    private final Integer numberOfClients;
 }
