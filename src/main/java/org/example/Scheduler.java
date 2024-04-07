@@ -25,12 +25,19 @@ public class Scheduler {
 
     public synchronized void dispatchTask(Task task) {
         this.strategy.addTask(this.serverList, task);
-        System.out.println("dispatch finished");
     }
 
-    public synchronized void stopServers() {
+    public synchronized Boolean stopServers() {
+        Boolean flag = true;
         for (Server server : this.serverList) {
-            server.setHasFinished();
+            flag = flag & server.setHasFinished();
+        }
+        return flag;
+    }
+
+    public synchronized void forceStopServers() {
+        for (Server server : this.serverList) {
+            server.forceStop();
         }
     }
 

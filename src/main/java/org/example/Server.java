@@ -15,18 +15,17 @@ public class Server implements Runnable {
     @Override
     public void run() {
         while (!hasFinished.get()) {
-
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println("Exception: " + e);
+            }
             for (Task task : this.taskQ) {
                 task.decrementServiceTime();
                 if(task.getServiceTime() <= 0)
                     this.taskQ.remove(task);
             }
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println("Exception: " + e);
-            }
         }
     }
 
@@ -41,10 +40,15 @@ public class Server implements Runnable {
     public BlockingQueue<Task> getTaskQ() {
         return taskQ;
     }
-    public synchronized void setHasFinished() {
-//        if(this.taskQ.isEmpty())
+    public synchronized Boolean setHasFinished() {
+        if(this.taskQ.isEmpty()) {
             this.hasFinished.set(true);
-        System.out.println("told");
+            return true;
+        }
+        return false;
+    }
+    public synchronized void forceStop() {
+        this.hasFinished.set(true);
     }
 
     private final String serverName;
