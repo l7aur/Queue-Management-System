@@ -39,8 +39,8 @@ public class SimulationManager implements Runnable{
 
     @Override
     public synchronized void run() {
-        tasks = this.generatePredefinedTasks();
-//        BlockingQueue<Task> tasks = this.generatePredefinedTasks(this.numberOfClients);
+//        tasks = this.generatePredefinedTasks();
+        tasks = this.generateRandomTasks(this.numberOfClients);
         this.printTasks(tasks);
         while(currentTime <= timeLimit && !noWork) {
             System.out.println("<DEBUG>Current time: " + currentTime);
