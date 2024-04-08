@@ -10,6 +10,7 @@ public class App {
     }
 
     public void start() {
+        ApplicationFrame applicationFrame = new ApplicationFrame(this);
         StartButtonActionListener actionListener = this.applicationFrame.getActionListener();
         SimulationManager manager = new SimulationManager(actionListener.getInputData(), actionListener.getSelectionPolicy());
         Thread thread = new Thread(manager);
