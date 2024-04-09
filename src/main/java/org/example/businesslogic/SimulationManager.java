@@ -1,5 +1,6 @@
 package org.example.businesslogic;
 
+import org.example.gui.BackPanel;
 import org.example.utility.SelectionPolicy;
 
 import java.io.File;
@@ -11,7 +12,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class SimulationManager implements Runnable{
-    public SimulationManager(ArrayList<Integer> inputData, SelectionPolicy selectionPolicy) {
+    public SimulationManager(ArrayList<Integer> inputData, SelectionPolicy selectionPolicy, BackPanel backPanel) {
+        this.backPanel = backPanel;
         this.numberOfClients = inputData.getFirst();
         this.numberOfServers = inputData.get(1);
         this.timeLimit = inputData.get(2);
@@ -64,8 +66,8 @@ public class SimulationManager implements Runnable{
             catch (InterruptedException e) {
                 System.out.println("Simulation interrupted");
             }
-
             currentTime++;
+            this.backPanel.updateContent(currentTime, tasks, scheduler.getServerList());
             if(currentTime > timeLimit){
                 this.scheduler.forceStopServers();
             }
@@ -136,8 +138,8 @@ public class SimulationManager implements Runnable{
         Random random = new Random();
         LinkedBlockingQueue<Task> arrayList = new LinkedBlockingQueue<>();
         for (int i = 0; i < howMany; i++) {
-            arrayList.add(new Task(i + 1, random.nextInt(maxArrivalTime - minArrivalTime) + 1,
-                    random.nextInt(maxProcessingTime - minProcessingTime) + minProcessingTime));
+            arrayList.add(new Task(i + 1, random.nextInt(maxArrivalTime - minArrivalTime + 1),
+                    random.nextInt(maxProcessingTime - minProcessingTime + 1) + minProcessingTime));
         }
         return arrayList;
     }
@@ -160,6 +162,7 @@ public class SimulationManager implements Runnable{
     private Boolean noWork = false;
     private File stateFile;
     private BlockingQueue<Task> tasks;
+    private final BackPanel backPanel;
     private final Integer timeLimit;
     private final Integer maxProcessingTime;
     private final Integer minProcessingTime;

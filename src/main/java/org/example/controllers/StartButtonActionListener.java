@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 import org.example.App;
+import org.example.gui.BackPanel;
 import org.example.utility.SelectionPolicy;
 
 import javax.swing.*;
@@ -11,6 +12,16 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 public class StartButtonActionListener implements ActionListener {
+    public StartButtonActionListener(ArrayList<JTextField> textFields, ButtonGroup buttonGroup, App currentApp, CardLayout cardLayout, Container container, BackPanel backPanel) {
+        super();
+        this.currentApp = currentApp;
+        this.textFields = textFields;
+        this.buttonGroup = buttonGroup;
+        this.cardLayout = cardLayout;
+        this.cPane = container;
+        this.backPanel = backPanel;
+        this.inputData = new ArrayList<>();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         for (JTextField field : textFields) {
@@ -29,27 +40,19 @@ public class StartButtonActionListener implements ActionListener {
                 break;
             }
         }
-
+        this.backPanel.createContent(inputData.getFirst(), inputData.get(1));
         this.cardLayout.last(this.cPane);
         currentApp.start();
-    }
-
-    public StartButtonActionListener(ArrayList<JTextField> textFields, ButtonGroup buttonGroup, App currentApp, CardLayout cardLayout, Container container) {
-        super();
-        this.currentApp = currentApp;
-        this.textFields = textFields;
-        this.buttonGroup = buttonGroup;
-        this.cardLayout = cardLayout;
-        this.cPane = container;
-        this.inputData = new ArrayList<>();
     }
 
     public ArrayList<Integer> getInputData() {
         return inputData;
     }
-
     public SelectionPolicy getSelectionPolicy() {
         return selectionPolicy;
+    }
+    public BackPanel getBackPanel() {
+        return this.backPanel;
     }
 
     private final App currentApp;
@@ -58,5 +61,6 @@ public class StartButtonActionListener implements ActionListener {
     private final ArrayList<Integer> inputData;
     private final CardLayout cardLayout;
     private final Container cPane;
+    private final BackPanel backPanel;
     private SelectionPolicy selectionPolicy;
 }
