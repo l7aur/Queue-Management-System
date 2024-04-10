@@ -14,6 +14,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class SimulationManager implements Runnable{
     public SimulationManager(ArrayList<Integer> inputData, SelectionPolicy selectionPolicy, BackPanel backPanel) {
         this.backPanel = backPanel;
+        this.peakHour = this.clientsAtPeakHour = 0;
+        this.totalServiceTime = 0;
         this.numberOfClients = inputData.getFirst();
         this.numberOfServers = inputData.get(1);
         this.timeLimit = inputData.get(2);
@@ -27,20 +29,16 @@ public class SimulationManager implements Runnable{
     }
 
     private File initializeOutputFile() {
+        if(this.stateFile != null)
+            if(!this.stateFile.delete())
+                System.out.println("<ERROR> stateOfServers.txt was not recreated");
         this.stateFile = new File("stateOfServers.txt");
-        if(stateFile.exists() && stateFile.delete()){
-            try {
-                if(stateFile.createNewFile())
-                    return stateFile;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return null;
+        return stateFile;
     }
 
     @Override
     public synchronized void run() {
+        this.stateFile = initializeOutputFile();
 //        tasks = this.generatePredefinedTasks();
         tasks = this.generateRandomTasks(this.numberOfClients);
         this.printTasks(tasks);
@@ -86,7 +84,9 @@ public class SimulationManager implements Runnable{
             double x = 0.0;
             for (Server server : this.scheduler.getServerList())
                 x += server.getWaitingPeriod().doubleValue();
-            fileOut.write("Average overall waiting time: " + x / this.numberOfClients);
+            fileOut.write("Average overall waiting time: " + x / this.numberOfClients + "\n");
+            fileOut.write("Average overall service time: " + (this.totalServiceTime / this.numberOfClients) + "\n");
+            fileOut.write("Peak hour: " + this.peakHour + "\n");
             fileOut.flush();
             fileOut.close();
         } catch (IOException e) {
@@ -117,7 +117,9 @@ public class SimulationManager implements Runnable{
                 fileOut.write( ">>" + task.toString() + "\n");
             }
             fileOut.write("\nState of servers:\n");
+            int clientsPerHour = 0;
             for (Server server : this.scheduler.getServerList()) {
+                clientsPerHour += server.getTaskQ().size();
                 if(server.getTaskQ().isEmpty())
                     fileOut.write("server: <" + server.getServerName() + "> is closed\n");
                 else
@@ -125,6 +127,10 @@ public class SimulationManager implements Runnable{
                 for (Task task : server.getTaskQ()) {
                     fileOut.write("\t" + task.toString() + "\n");
                 }
+            }
+            if(clientsPerHour > clientsAtPeakHour) {
+                this.clientsAtPeakHour = clientsPerHour;
+                this.peakHour = currentTime;
             }
             fileOut.write("\n\n");
             fileOut.flush();
@@ -138,8 +144,10 @@ public class SimulationManager implements Runnable{
         Random random = new Random();
         LinkedBlockingQueue<Task> arrayList = new LinkedBlockingQueue<>();
         for (int i = 0; i < howMany; i++) {
-            arrayList.add(new Task(i + 1, random.nextInt(maxArrivalTime - minArrivalTime + 1),
-                    random.nextInt(maxProcessingTime - minProcessingTime + 1) + minProcessingTime));
+            Integer aTime = random.nextInt(maxArrivalTime - minArrivalTime + 1);
+            Integer sTime = random.nextInt(maxProcessingTime - minProcessingTime + 1) + minProcessingTime;
+            arrayList.add(new Task(i + 1, aTime, sTime));
+            this.totalServiceTime += sTime;
         }
         return arrayList;
     }
@@ -157,6 +165,9 @@ public class SimulationManager implements Runnable{
     private Boolean noWork = false;
     private File stateFile;
     private BlockingQueue<Task> tasks;
+    private float totalServiceTime;
+    private Integer peakHour;
+    private Integer clientsAtPeakHour;
     private final BackPanel backPanel;
     private final Integer timeLimit;
     private final Integer maxProcessingTime;
