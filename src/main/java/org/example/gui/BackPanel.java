@@ -65,7 +65,7 @@ public class BackPanel extends JPanel {
 
         for (int i = 2; i < n; i++) {
             panelHolder[i][0] = new QPanel();
-            for (int j = 0; j < servers.get(i - 2).getTaskQ().size(); j++)
+            for (int j = 0; j < servers.get(i - 2).getTaskQ().size() && j + 1 < m; j++)
                 panelHolder[i][j + 1] = new PPanel(-1);
             for (int j = servers.get(i - 2).getTaskQ().size(); j + 1 < m; j++)
                 panelHolder[i][j + 1] = new EPanel();
