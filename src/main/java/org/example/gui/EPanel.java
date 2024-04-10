@@ -5,15 +5,12 @@ import java.awt.*;
 
 public class EPanel extends JPanel {
     public EPanel() {
-
     }
 
     @Override
     public void paint(Graphics g) {
-        g.drawLine((int) (5),
-                (int)(5),
-                (int)(10),
-                (int)(10));
+        g.setColor(Color.green);
+        g.drawRect(0, 0, 10, 5);
     }
 
 }

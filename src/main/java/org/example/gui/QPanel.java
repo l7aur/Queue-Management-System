@@ -8,13 +8,7 @@ public class QPanel extends JPanel {
     }
     @Override
     public void paint(Graphics g) {
-//        g.drawOval((int) (0.25 * this.getMaximumSize().width),
-//                (int)(0.25 + this.getMaximumSize().width),
-//                (int)(0.75 * this.getMaximumSize().width),
-//                (int)(0.75 * this.getMaximumSize().width));
-        g.drawOval((int) (5),
-                (int)(5),
-                (int)(10),
-                (int)(10));
+        g.setColor(Color.pink);
+        g.fillOval(1,1,10,10);
     }
 }
