@@ -45,7 +45,6 @@ public class BackPanel extends JPanel {
     public void updateContent(Integer currentTime, BlockingQueue<Task> waitingQ, ArrayList<Server> servers) {
         this.removeComponents();
         boolean care = (waitingQ.size() <= 30);
-        int[] arr = new int[servers.size()];
 
         panelHolder[0][0] = this.createTimePanel(currentTime);
         for (int j = 1; j < this.m; j++) {

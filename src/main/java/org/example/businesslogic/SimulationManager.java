@@ -21,7 +21,7 @@ public class SimulationManager implements Runnable{
         this.maxArrivalTime = inputData.get(4);
         this.minProcessingTime = inputData.get(5);
         this.maxProcessingTime = inputData.get(6);
-        this.scheduler = new Scheduler(numberOfServers, numberOfClients);
+        this.scheduler = new Scheduler(numberOfServers);
         this.scheduler.changeStrategy(selectionPolicy);
         this.stateFile = initializeOutputFile();
     }
@@ -146,11 +146,6 @@ public class SimulationManager implements Runnable{
 
     private BlockingQueue<Task> generatePredefinedTasks() {
         BlockingQueue<Task> arrayList = new LinkedBlockingQueue<>();
-//        arrayList.add(new Task(1, 2, 2));
-//        arrayList.add(new Task(2, 3, 3));
-//        arrayList.add(new Task(3, 4, 3));
-//        arrayList.add(new Task(4, 10, 2));
-
         arrayList.add(new Task(1, 1, 6));
         arrayList.add(new Task(2, 1, 3));
         arrayList.add(new Task(3, 1, 1));

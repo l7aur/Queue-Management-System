@@ -6,8 +6,8 @@ import org.example.gui.ApplicationFrame;
 
 public class App {
     public App() {
-        this.applicationFrame = new ApplicationFrame(this);
-        this.actionListener = this.applicationFrame.getFrontPanel().getActionListener();
+        ApplicationFrame applicationFrame = new ApplicationFrame(this);
+        this.actionListener = applicationFrame.getFrontPanel().getActionListener();
     }
 
     public void start() {
@@ -16,6 +16,5 @@ public class App {
         thread.start();
     }
 
-    private final ApplicationFrame applicationFrame;
     private final StartButtonActionListener actionListener;
 }

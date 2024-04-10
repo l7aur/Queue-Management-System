@@ -6,9 +6,7 @@ import org.example.utility.Strategy;
 import java.util.ArrayList;
 
 public class Scheduler {
-    public Scheduler(Integer maximumNumberOfServers, Integer maximumTasksPerServer) {
-        this.maximumNumberOfServers = maximumNumberOfServers;
-        this.maximumTasksPerServer = maximumTasksPerServer;
+    public Scheduler(Integer maximumNumberOfServers) {
         this.serverList = new ArrayList<>();
         for (int i = 0; i < maximumNumberOfServers; i++) {
             this.serverList.add(new Server("Thread #" + (i + 1)));
@@ -30,7 +28,7 @@ public class Scheduler {
     }
 
     public synchronized Boolean stopServers() {
-        Boolean flag = true;
+        boolean flag = true;
         for (Server server : this.serverList) {
             flag = flag & server.setHasFinished();
         }
@@ -48,7 +46,5 @@ public class Scheduler {
     }
 
     private final ArrayList<Server> serverList;
-    private final Integer maximumNumberOfServers;
-    private final Integer maximumTasksPerServer;
     private Strategy strategy;
 }

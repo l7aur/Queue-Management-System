@@ -7,8 +7,8 @@ public class TimeStrategy implements Strategy {
     @Override
     public void addTask(List<Server> servers, Task t) {
         Server bestServer = servers.getFirst();
-        Integer bestWaitingPeriod = Integer.MAX_VALUE;
-        Integer haveToWait = 0;
+        int bestWaitingPeriod = Integer.MAX_VALUE;
+        Integer haveToWait;
         for (Server server : servers) {
             haveToWait = 0;
             for (Task task : server.getTaskQ())

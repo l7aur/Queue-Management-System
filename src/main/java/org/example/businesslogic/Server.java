@@ -26,7 +26,8 @@ public class Server implements Runnable {
             for (Task task : this.taskQ) {
                 task.decrementServiceTime();
                 if(task.getServiceTime() <= 0)
-                    this.taskQ.remove(task);
+                    if(!this.taskQ.remove(task))
+                        System.out.println("<DEBUG>ERROR");
                 break;
             }
         }
@@ -47,9 +48,6 @@ public class Server implements Runnable {
     public AtomicInteger getWaitingPeriod() {
         return waitingPeriod;
     }
-    public AtomicInteger getNumberOfPeople() {
-        return numberOfPeople;
-    }
 
     public synchronized Boolean setHasFinished() {
         if(this.taskQ.isEmpty()) {
@@ -63,8 +61,8 @@ public class Server implements Runnable {
     }
 
     private final String serverName;
-    private BlockingQueue<Task> taskQ;
-    private AtomicInteger waitingPeriod;
-    private AtomicInteger numberOfPeople;
-    private AtomicBoolean hasFinished = new AtomicBoolean(false);
+    private final BlockingQueue<Task> taskQ;
+    private final AtomicInteger waitingPeriod;
+    private final AtomicInteger numberOfPeople;
+    private final AtomicBoolean hasFinished = new AtomicBoolean(false);
 }
