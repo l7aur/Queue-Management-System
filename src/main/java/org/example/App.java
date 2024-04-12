@@ -5,6 +5,8 @@ import org.example.controllers.StartButtonActionListener;
 import org.example.gui.ApplicationFrame;
 
 public class App {
+    private final StartButtonActionListener actionListener;
+
     public App() {
         ApplicationFrame applicationFrame = new ApplicationFrame(this);
         this.actionListener = applicationFrame.getFrontPanel().getActionListener();
@@ -15,6 +17,4 @@ public class App {
         Thread thread = new Thread(manager);
         thread.start();
     }
-
-    private final StartButtonActionListener actionListener;
 }

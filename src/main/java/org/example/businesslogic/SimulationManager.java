@@ -12,6 +12,23 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class SimulationManager implements Runnable{
+    private Integer currentTime = 0;
+    private final Scheduler scheduler;
+    private Boolean noWork = false;
+    private File stateFile;
+    private BlockingQueue<Task> tasks;
+    private float totalServiceTime;
+    private Integer peakHour;
+    private Integer clientsAtPeakHour;
+    private final BackPanel backPanel;
+    private final Integer timeLimit;
+    private final Integer maxProcessingTime;
+    private final Integer minProcessingTime;
+    private final Integer minArrivalTime;
+    private final Integer maxArrivalTime;
+    private final Integer numberOfServers;
+    private final Integer numberOfClients;
+
     public SimulationManager(ArrayList<Integer> inputData, SelectionPolicy selectionPolicy, BackPanel backPanel) {
         this.backPanel = backPanel;
         this.peakHour = this.clientsAtPeakHour = 0;
@@ -160,20 +177,4 @@ public class SimulationManager implements Runnable{
         arrayList.add(new Task(4, 1, 2));
         return arrayList;
     }
-    private Integer currentTime = 0;
-    private final Scheduler scheduler;
-    private Boolean noWork = false;
-    private File stateFile;
-    private BlockingQueue<Task> tasks;
-    private float totalServiceTime;
-    private Integer peakHour;
-    private Integer clientsAtPeakHour;
-    private final BackPanel backPanel;
-    private final Integer timeLimit;
-    private final Integer maxProcessingTime;
-    private final Integer minProcessingTime;
-    private final Integer minArrivalTime;
-    private final Integer maxArrivalTime;
-    private final Integer numberOfServers;
-    private final Integer numberOfClients;
 }

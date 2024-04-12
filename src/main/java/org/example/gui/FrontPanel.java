@@ -9,6 +9,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class FrontPanel extends JPanel {
+    private ButtonGroup group;
+    private final ArrayList<JTextField> textFields;
+    private StartButtonActionListener actionListener;
+    private final App currentApp;
+    private final CardLayout cardLayout;
+    private final Container content;
+    private final BackPanel backPanel;
+
     public FrontPanel(App app, CardLayout cardLayout, Container container, BackPanel backPanel) {
         super();
         this.setLayout(new BorderLayout());
@@ -86,12 +94,4 @@ public class FrontPanel extends JPanel {
     public StartButtonActionListener getActionListener() {
         return actionListener;
     }
-    private ButtonGroup group;
-    private final ArrayList<JTextField> textFields;
-    private StartButtonActionListener actionListener;
-    private final App currentApp;
-    private final CardLayout cardLayout;
-    private final Container content;
-    private final BackPanel backPanel;
-
 }

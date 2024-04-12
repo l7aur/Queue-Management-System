@@ -6,6 +6,9 @@ import org.example.utility.Strategy;
 import java.util.ArrayList;
 
 public class Scheduler {
+    private final ArrayList<Server> serverList;
+    private Strategy strategy;
+
     public Scheduler(Integer maximumNumberOfServers) {
         this.serverList = new ArrayList<>();
         for (int i = 0; i < maximumNumberOfServers; i++) {
@@ -44,7 +47,4 @@ public class Scheduler {
     public ArrayList<Server> getServerList() {
         return serverList;
     }
-
-    private final ArrayList<Server> serverList;
-    private Strategy strategy;
 }

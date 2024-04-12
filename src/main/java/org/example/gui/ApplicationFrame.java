@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ApplicationFrame extends JFrame {
+    private final FrontPanel frontPanel;
+
     public ApplicationFrame(App app) {
         super("Queue Management System");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,6 +27,4 @@ public class ApplicationFrame extends JFrame {
     public FrontPanel getFrontPanel() {
         return frontPanel;
     }
-
-    private final FrontPanel frontPanel;
 }

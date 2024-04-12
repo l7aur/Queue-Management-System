@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 
 public class BackPanel extends JPanel {
+    private Integer n;
+    private Integer m;
+    private JPanel[][] panelHolder;
+
     public BackPanel(Integer width, Integer height) {
         super();
         this.setSize(width, height);
@@ -93,8 +97,4 @@ public class BackPanel extends JPanel {
     private void removeComponents() {
         this.removeAll();
     }
-
-    private Integer n;
-    private Integer m;
-    private JPanel[][] panelHolder;
 }

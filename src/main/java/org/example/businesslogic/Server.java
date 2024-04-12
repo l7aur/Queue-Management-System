@@ -6,6 +6,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Server implements Runnable {
+    private final String serverName;
+    private final BlockingQueue<Task> taskQ;
+    private final AtomicInteger waitingPeriod;
+    private final AtomicInteger numberOfPeople;
+    private final AtomicBoolean hasFinished = new AtomicBoolean(false);
+
     public Server(String serverName) {
         this.serverName = serverName;
         this.taskQ = new LinkedBlockingQueue<>();
@@ -59,10 +65,4 @@ public class Server implements Runnable {
     public synchronized void forceStop() {
         this.hasFinished.set(true);
     }
-
-    private final String serverName;
-    private final BlockingQueue<Task> taskQ;
-    private final AtomicInteger waitingPeriod;
-    private final AtomicInteger numberOfPeople;
-    private final AtomicBoolean hasFinished = new AtomicBoolean(false);
 }

@@ -1,6 +1,10 @@
 package org.example.businesslogic;
 
 public class Task {
+    private final Integer id;
+    private final Integer arrivalTime;
+    private Integer serviceTime;
+
     public Task(Integer id, Integer arrivalTime, Integer serviceTime) {
         this.id = id;
         this.arrivalTime = arrivalTime;
@@ -21,8 +25,4 @@ public class Task {
     public void decrementServiceTime() {
         this.serviceTime -= 1;
     }
-
-    private final Integer id;
-    private final Integer arrivalTime;
-    private Integer serviceTime;
 }
