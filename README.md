@@ -217,7 +217,8 @@ Other further developments:
 
 ## Pictures
 
-![image](https://github.com/l7aur/Queue-Management-System/assets/81981519/7e5b3eff-d320-4976-8338-1290b9f58dee)
-![image](https://github.com/l7aur/Queue-Management-System/assets/81981519/46d11ded-8ca4-4667-92f6-692ead93b6b2)
-
+<p align="center">
+  <img src="https://github.com/l7aur/Queue-Management-System/assets/81981519/7e5b3eff-d320-4976-8338-1290b9f58dee" alt="App_image_1"/>
+  <img src="https://github.com/l7aur/Queue-Management-System/assets/81981519/46d11ded-8ca4-4667-92f6-692ead93b6b2" alt="App_image_2"/>
+</p>
 
