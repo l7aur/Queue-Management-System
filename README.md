@@ -1,6 +1,6 @@
 # Queue Management System
 
-More explanations can be found [here](/Documentation_resources/Documentation.pdf). 
+More explanations can be found [here](</Documentation resources/Documentation.pdf>). 
 
 ## Contents
 
@@ -145,12 +145,12 @@ Test results:
   - Maximum service time = 4
 
 	Append to the shortest queue strategy results are stored in the files:
-	- “TEST1_ShortestQueue_tasks.txt”
-	- “TEST1_ShortestQueue_stateOfServers.txt”
+	- [Log of Events](<Documentation resources/TEST1_ShortestQueue_stateOfServers.txt>)
+	- [List of Generated People](<Documentation resources/TEST1_ShortestQueue_tasks.txt>)
   
 	Append to the queue with the smallest average waiting time are stored in the files: 
-	- “TEST1_ShortestWaitingTime_tasks.txt”
-	- “TEST1_ShortestWaitingTime_stateOfServers.txt”
+	- [Log of Events](<Documentation resources/TEST1_ShortestWaitingTime_stateOfServers.txt>)
+	- [List of Generated People](<Documentation resources/TEST1_ShortestWaitingTime_tasks.txt>)
 
 - Input parameters:
   - Number of People = 50
@@ -161,13 +161,13 @@ Test results:
   - Minimum service time = 1
   - Maximum service time = 7
 
-	Append to the shortest queue strategy are stored in the files: 
-	- “TEST2_ShortestQueue_tasks.txt”
-	- “TEST2_ShortestQueue_stateOfServers.txt”
+	Append to the shortest queue strategy results are stored in the files:
+	- [Log of Events](<Documentation resources/TEST2_ShortestQueue_stateOfServers.txt>)
+	- [List of Generated People](<Documentation resources/TEST2_ShortestQueue_tasks.txt>)
   
-	Append to the queue with the smallest average waiting time are stored in the files:
-	- “TEST2_ShortestQueue_tasks.txt”
-	- “TEST2_ShortestQueue_stateOfServers.txt”
+	Append to the queue with the smallest average waiting time are stored in the files: 
+	- [Log of Events](<Documentation resources/TEST2_ShortestWaitingTime_stateOfServers.txt>)
+	- [List of Generated People](<Documentation resources/TEST2_ShortestWaitingTime_tasks.txt>)
 
 - Input parameters:
   - Number of People = 1000
@@ -179,12 +179,12 @@ Test results:
   - Maximum service time = 9
 
 	Append to the shortest queue strategy results are stored in the files:
-	- “TEST3_ShortestQueue_tasks.txt”
-	- “TEST3_ShortestQueue_stateOfServers.txt”
+	- [Log of Events](<Documentation resources/TEST3_ShortestQueue_stateOfServers.txt>)
+	- [List of Generated People](<Documentation resources/TEST3_ShortestQueue_tasks.txt>)
   
 	Append to the queue with the smallest average waiting time are stored in the files: 
-	- “TEST3_ShortestWaitingTime_tasks.txt”
-	- “TEST3_ShortestWaitingTime_stateOfServers.txt”
+	- [Log of Events](<Documentation resources/TEST3_ShortestWaitingTime_stateOfServers.txt>)
+	- [List of Generated People](<Documentation resources/TEST3_ShortestWaitingTime_tasks.txt>)
 	
 Based on more iterations of these tests I could draw no certain answer: both strategies perform almost the same in terms of overall waiting time. The peak hour and the average service time are not that useful in such a rough interpretation of the results. With more advanced tools, which may be provided by statistics, these two output results may characterize the population of people of a certain test. Similar populations can be used to analyze the two queueing strategies and so an efficiency-related comparison between them may come out on top.
  
