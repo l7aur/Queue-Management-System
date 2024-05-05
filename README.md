@@ -40,7 +40,7 @@ The application is intended to work under some assumptions:
 - If all the parameters are inserted, the “START SIMMULATION” button can be pressed and the window changes into the simulation panel. If any parameter is not a valid number, the console will print an exception message and the application will not start. However, the application will not halt or close.
 - The application will start the simulation and wait indefinitely (even if the simulation finishes) until the close button is pressed.
 
-*NOTE: At any time, the application can be closed if the close button (X) in the top right corner is pressed.*
+***NOTE**: At any time, the application can be closed if the close button (X) in the top right corner is pressed.*
 
 ## Design
 
@@ -187,7 +187,7 @@ Test results:
 	- [Log of Events](<Documentation resources/TEST3_ShortestWaitingTime_stateOfServers.txt>)
 	- [List of Generated People](<Documentation resources/TEST3_ShortestWaitingTime_tasks.txt>)
 	
-Based on more iterations of these tests I could draw no certain answer: both strategies perform almost the same in terms of overall waiting time. The peak hour and the average service time are not that useful in such a rough interpretation of the results. With more advanced tools, which may be provided by statistics, these two output results may characterize the population of people of a certain test. Similar populations can be used to analyze the two queueing strategies and so an efficiency-related comparison between them may come out on top.
+Based on more iterations of these tests I could draw no certain answer: both strategies perform almost the same in terms of overall waiting time. The peak hour and the average service time are not that useful in such a rough interpretation of the results. With more advanced tools (which may be provided by statistics), these two output results may characterize a population of people. Similar populations can be used to analyze the two queueing strategies and based on multiple iterations an efficiency-related graphical representations could be drawn. By comparing those two graphs one of the implemented queueing strategies may come out on top.
  
 ## Conclusions
 
