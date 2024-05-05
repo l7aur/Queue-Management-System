@@ -11,7 +11,8 @@ More explanations can be found [here](</Documentation resources/Documentation.pd
 - [Results](#Results)
 - [Conclusions](#Conclusions)
 - [References](#References)
-
+- [Pictures](#Pictures)
+  
 ## Assignment Objective 
  
 Design and implement a queues management application which assigns clients to queues such that the waiting time is minimized. Queues are commonly used to model real world domains. The main objective of a queue is to provide a place for a "client" to wait before receiving a "service". The management of queue-based systems is interested in minimizing the time amount their "clients" are waiting in queues before they are served. One way to minimize the waiting time is to add more servers, i.e., more queues in the system (each queue is considered as having an associated processor) but this approach increases the costs of the service supplier. 
@@ -213,6 +214,8 @@ Other further developments:
  - Use Case Diagrams | Unified Modeling Language (UML) - GeeksforGeeks
  - Unified Modeling Language - Wikipedia
  - draw.io (diagrams.net)
+
+## Pictures
 
 ![image](https://github.com/l7aur/Queue-Management-System/assets/81981519/7e5b3eff-d320-4976-8338-1290b9f58dee)
 ![image](https://github.com/l7aur/Queue-Management-System/assets/81981519/46d11ded-8ca4-4667-92f6-692ead93b6b2)
