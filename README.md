@@ -204,16 +204,18 @@ Other further developments:
  
 ## References
 
- - Programming Techniques lectures, laboratories, and support materials
- - Paul Deitel, Harvey Deitel, Java How to program (10th edition), Publisher: Pearson Education, Inc., Upper Saddle River, NJ, United States, ISBN: 978-0-13-380780-6, Published: 2015
- - Ștefan Tanasă, Ștefan Andrei, Cristian Olaru, Java: de la 0 la expert (2nd edition), Publisher: Polirom, Iași, Romania, ISBN: 978-973-46-2405-8, Published: 2011
- - Java Thread Pool Example using Executors and ThreadPoolExecutor (javacodegeeks.com)
- - java.util.Timer.schedule() Method (tutorialspoint.com)
- - Lesson: Concurrency (The Java™ Tutorials > Essential Java Classes) (oracle.com)
- - Runnable vs. Callable in Java | Baeldung
- - Use Case Diagrams | Unified Modeling Language (UML) - GeeksforGeeks
- - Unified Modeling Language - Wikipedia
- - draw.io (diagrams.net)
+- [Unified Modeling Language](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
+- [Use Case Diagrams | Unified Modeling Language (UML)](https://www.geeksforgeeks.org/use-case-diagram/)
+- [Draw.io](https://app.diagrams.net/)
+- [Use Case Diagram Tutorial](https://creately.com/guides/use-case-diagram-tutorial/)
+- [A Visual Guide to Layout Managers](https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html#border)
+- [Fundamental Programming Techniques lectures, laboratories, and support materials](https://dsrl.eu/)
+- [Java Thread Pool Example using Executors and ThreadPoolExecutor](https://www.javacodegeeks.com/2013/01/java-thread-pool-example-using-executors-and-threadpoolexecutor.html)
+- [java.util.Timer.schedule() Method](https://www.tutorialspoint.com/java/util/timer_schedule_period.htm)
+- [Lesson: Concurrency (The Java™ Tutorials > Essential Java Classes)](https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html)
+- [Runnable vs. Callable in Java](https://www.baeldung.com/java-runnable-callable)
+- Paul Deitel, Harvey Deitel, Java How to program (10th edition), Publisher: Pearson Education, Inc., Upper Saddle River, NJ, United States, ISBN: 978-0-13-380780-6, Published: 2015
+- Ștefan Tanasă, Ștefan Andrei, Cristian Olaru, Java: de la 0 la expert (2nd edition), Publisher: Polirom, Iași, Romania, ISBN: 978-973-46-2405-8, Published: 2011
 
 ## Pictures
 
